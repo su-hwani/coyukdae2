@@ -1,0 +1,23 @@
+/* Header.css (혹은 원하는 스타일 파일) */
+
+.header {
+    
+    display: flex;
+    flex-direction: row;
+    text-align: center; /* 텍스트 가운데 정렬 */
+    color: white; /* 텍스트 색상 설정 */
+    justify-content: center;
+  }
+.header-title {
+    vertical-align: 5px;
+}
+
+.tree-icon {
+    margin: 10px;
+}
+
+.button-divider {
+    width: 100%; /* 가로선이 컨테이너 전체 너비를 가지도록 설정 */
+    margin: 0px; /* 위아래 간격 조절 */
+    border: 2px solid #333;
+  }

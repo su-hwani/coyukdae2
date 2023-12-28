@@ -1,0 +1,87 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* App.css */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Header-Box {
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b); /* 빨간색 그라데이션 */
+  min-height: 25vh; /* 화면 전체 높이를 채우도록 설정 */
+  color: white; /* 글자색을 흰색으로 설정 */
+  width: 100%; /* 너비를 100%로 설정하여 양쪽으로 확장 */
+  display: flex; /* Flexbox를 사용하여 내부 컨텐츠를 정렬 */
+  justify-content: center; /* 양쪽 끝으로 내부 컨텐츠를 정렬 */
+  align-items: center; /* 수직 정렬을 가운데로 설정 */
+  padding: 20px; /* 양쪽에 좌우 패딩을 추가하여 컨텐츠가 화면 양쪽 끝에 붙지 않도록 조절 */
+
+}
+
+.button-container {
+  border: 2px solid #333;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  border-radius: 30px; /* 테두리의 둥글기 정도를 조절합니다. */
+  padding: 30px;
+  font-size: 16px;
+  flex: 1;
+}
+
+.button-divider {
+  width: 100%; /* 가로선이 컨테이너 전체 너비를 가지도록 설정 */
+  margin: 0px; /* 위아래 간격 조절 */
+  border: 2px solid #333;
+}
+
+/* 수직선 스타일 */
+.vertical-line {
+  border-left: 10px solid #333; /* 세로선의 스타일을 지정합니다. */
+  height: 550px; /* 세로선의 높이를 조절합니다. */
+  margin: 10px; /* 세로선 주변의 여백을 조절합니다. */
+}
+
+.container {
+  display: flex;
+}
+
+
