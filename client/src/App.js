@@ -8,10 +8,7 @@ import Logo from './components/Logo/Logo.js';
 const App = () => {
   return (
     <div className="app-container">
-      
       <Logo></Logo>
-      
-      
       <div className='Header-Box'>
         <Header></Header>
       </div>
