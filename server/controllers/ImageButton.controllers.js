@@ -27,6 +27,13 @@ exports.create = async (req, res) => {
 }
 
 exports.findOne = async (req,res)=>{
+    const imageId = req.query.id;
+    if (!imageId) {
+      return res.status(400).send({
+        message: "Image ID is missing in the query string."
+      });
+    }
+    
     await ImageButton.findByID(2).then((result)=>{
       if (result.err) {
         if (result.err === "not_found") {
@@ -39,5 +46,16 @@ exports.findOne = async (req,res)=>{
           });
         }
       } else res.status(200).json(result.data);
+    });
+};
+
+exports.findAll = async (req,res)=>{
+  await ImageButton.findAll().then((result)=>{
+    if (result.err)
+        res.status(500).send({
+          message:
+            result.err || "Some error occurred while retrieving users."
+        });
+      else res.status(200).json(result.data);
     });
 };

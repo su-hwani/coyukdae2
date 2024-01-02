@@ -1,19 +1,26 @@
 /* Header.css (혹은 원하는 스타일 파일) */
 
 .header {
-    
     display: flex;
     flex-direction: row;
     text-align: center; /* 텍스트 가운데 정렬 */
     color: white; /* 텍스트 색상 설정 */
     justify-content: center;
   }
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
 .header-title {
     vertical-align: 5px;
+    font-family: "Rubik Doodle Shadow", serif;
+    font-size: 50px;
+    font-weight: bold; /* 글자를 굵게 표시 */
+    color: black; 
+    border-radius: 10px; /* 더 굵고 둥근 스타일을 위해 border-radius 적용 */
 }
 
 .tree-icon {
     margin: 10px;
+    color: black;
 }
 
 .button-divider {

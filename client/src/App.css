@@ -12,6 +12,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.button-divider {
+  width: 100%; /* 가로선이 컨테이너 전체 너비를 가지도록 설정 */
+  margin: 10px 0; /* 위아래 간격 조절 */
+  border: 20px solid #333;
+}
 
 .App-header {
   background-color: #282c34;
@@ -45,7 +50,7 @@
 }
 
 .Header-Box {
-  background: linear-gradient(to bottom, #ff7e5f, #feb47b); /* 빨간색 그라데이션 */
+  background: linear-gradient(to bottom, #F9BD9D, #FDE3D5); /* 빨간색 그라데이션 */
   min-height: 25vh; /* 화면 전체 높이를 채우도록 설정 */
   color: white; /* 글자색을 흰색으로 설정 */
   width: 100%; /* 너비를 100%로 설정하여 양쪽으로 확장 */
@@ -57,7 +62,6 @@
 }
 
 .button-container {
-  border: 2px solid #333;
   display: flex;
   justify-content: space-between;
   margin: 20px;
@@ -67,11 +71,7 @@
   flex: 1;
 }
 
-.button-divider {
-  width: 100%; /* 가로선이 컨테이너 전체 너비를 가지도록 설정 */
-  margin: 0px; /* 위아래 간격 조절 */
-  border: 2px solid #333;
-}
+
 
 /* 수직선 스타일 */
 .vertical-line {

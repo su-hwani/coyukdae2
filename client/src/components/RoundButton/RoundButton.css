@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+.Round-Text-container {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #F9BD9D, #FDE3D5);
+    font-family: "Rubik Doodle Shadow", serif;
+    font-weight: bold; /* 글자를 굵게 표시 */
+    color: black; 
+    border-radius: 10px;
+}

@@ -1,64 +1,89 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './ImageButton.css'
-import { FaComputer } from "react-icons/fa6";
+import * as ReactIcons from "react-icons/fa6";
+import getImageAll from '../../api/getImageAll';
+import RoundButton from '../RoundButton/RoundButton';
 
-const ImageButton = () => {
-  const [imageInfo, setImageInfo] = useState({
-    imageUrl: '',
-    imageName: ''
-  });
+const ImageButton = ({ onClick }) => {
+
+  const [imageAllInfo, storeImageInfo] = useState([{
+    IMAGEURL: 'https://cdn-pro-web-223-42.cdn-nhncommerce.com/auroraworld1_godomall_com/data/goods/19/10/42//1000004381/1000004381_add1_061.jpg',
+    IMAGENAME: 'test1',
+    IMAGEID: 0,
+  }]);
+
+  const selectedImageIdRef = useRef([]);
+
+  const imageIdRef = useRef(0);
 
   useEffect(() => {
-    // 서버에서 이미지 정보를 비동기로 받아옴
-    axios.get('http://localhost:8080/ImageButton/get')
-      .then(response => {
-        setImageInfo({
-          imageUrl: response.data.IMAGEURL,
-          imageName: response.data.IMAGENAME
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching image info:', error);
-      });
-  }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 함
+    const fetchData = async () => {
+      try {
+        const response = await getImageAll();
+        storeImageInfo(response);
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+  const handleClick = async (newSelectedImageId) => {
 
-  const handleClick = () => {
-    // 클릭할 때마다 imageName을 현재 시간 기준으로 업데이트
-    setImageInfo(prevState => ({
-      ...prevState,
-      imageName: `49`
-    }));
+    const currentSelectedImageId = selectedImageIdRef.current 
+    currentSelectedImageId.push(newSelectedImageId)
+    selectedImageIdRef.current = currentSelectedImageId
+    console.log(selectedImageIdRef)
+    onClick();
+    const nextImageId = imageIdRef.current + 2;
+    imageIdRef.current = nextImageId;
+    
+    if (nextImageId > imageAllInfo.length) {
+      console.error('Invalid imageId or no more images to update.');
+    } else if (nextImageId === imageAllInfo.length) {
+      console.log("ASD")
+    }
   };
 
   return (
     <div>
+      <div>
+        <div className='image-container-title'> What is the better </div>
         <div className="container">
-          <button onClick={handleClick} className="button-container">
-            {imageInfo.imageUrl && (
+          <button onClick={() => handleClick(imageIdRef.current)} className="button-container">
+            {imageAllInfo[imageIdRef.current] && (
               <div className='image-container'>
-                <FaComputer style={{ width: '250px', height: '250px' }}></FaComputer>
-                {imageInfo.imageName && <div className="image-name">{imageInfo.imageName}</div>}
+                <img className='image'
+                  src={imageAllInfo[imageIdRef.current].IMAGEURL}
+                  alt={imageAllInfo[imageIdRef.current].IMAGENAME}
+                  style={{ width: '300px', height: '250px' }}
+                />
+                {imageAllInfo[imageIdRef.current].IMAGENAME && <div className="image-name">{imageAllInfo[imageIdRef.current].IMAGENAME}</div>}
               </div>
             )}
           </button>
           <div className='button-gap'></div>
-          <button onClick={handleClick} className="button-container">
-            {imageInfo.imageUrl && (
+          <button onClick={() => handleClick(imageIdRef.current+1)} className="button-container">
+            {imageAllInfo[imageIdRef.current + 1] && (
               <div className='image-container'>
-                {/* <img
-                  src='http://kdsoa.co.kr/data/item/1686201662/thumb-6re466a81_700x700.png'
-                  alt={imageInfo.imageName}
-                  style={{ width: '400px', height: '400px' }}
-                /> */}
-                <FaComputer style={{ width: '250px', height: '250px' }}></FaComputer>
-                {imageInfo.imageName && <div className="image-name">{imageInfo.imageName}</div>}
+                <img className='image'
+                  src={imageAllInfo[imageIdRef.current + 1].IMAGEURL}
+                  alt={imageAllInfo[imageIdRef.current + 1].IMAGENAME}
+                  style={{ width: '300px', height: '250px' }}
+                />
+                {imageAllInfo[imageIdRef.current + 1].IMAGENAME && <div className="image-name">{imageAllInfo[imageIdRef.current + 1].IMAGENAME}</div>}
               </div>
             )}
           </button>
         </div>
+      </div>
     </div>
   );
+  
 };
+
 
 export default ImageButton;
