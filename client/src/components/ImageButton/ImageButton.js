@@ -4,12 +4,13 @@ import './ImageButton.css'
 import * as ReactIcons from "react-icons/fa6";
 import getImageAll from '../../api/getImageAll';
 import RoundButton from '../RoundButton/RoundButton';
+import storeSelectedImage from '../../api/storeSelectedImage';
 
 const ImageButton = ({ onClick }) => {
 
   const [imageAllInfo, storeImageInfo] = useState([{
-    IMAGEURL: 'https://cdn-pro-web-223-42.cdn-nhncommerce.com/auroraworld1_godomall_com/data/goods/19/10/42//1000004381/1000004381_add1_061.jpg',
-    IMAGENAME: 'test1',
+    IMAGEURL: '',
+    IMAGENAME: '',
     IMAGEID: 0,
   }]);
 
@@ -36,15 +37,21 @@ const ImageButton = ({ onClick }) => {
     const currentSelectedImageId = selectedImageIdRef.current 
     currentSelectedImageId.push(newSelectedImageId)
     selectedImageIdRef.current = currentSelectedImageId
-    console.log(selectedImageIdRef)
+    
     onClick();
+
     const nextImageId = imageIdRef.current + 2;
     imageIdRef.current = nextImageId;
-    
+
     if (nextImageId > imageAllInfo.length) {
       console.error('Invalid imageId or no more images to update.');
+
     } else if (nextImageId === imageAllInfo.length) {
-      console.log("ASD")
+      const response = await storeSelectedImage(selectedImageIdRef); 
+      document.cookie = `selectedImageIdArray=${JSON.stringify(currentSelectedImageId)}`;
+
+      console.log(response)
+      console.log(document.cookie)
     }
   };
 

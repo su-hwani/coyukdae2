@@ -33,7 +33,7 @@ exports.findOne = async (req,res)=>{
         message: "Image ID is missing in the query string."
       });
     }
-    
+
     await ImageButton.findByID(2).then((result)=>{
       if (result.err) {
         if (result.err === "not_found") {
@@ -50,6 +50,7 @@ exports.findOne = async (req,res)=>{
 };
 
 exports.findAll = async (req,res)=>{
+  console.log(req.session)
   await ImageButton.findAll().then((result)=>{
     if (result.err)
         res.status(500).send({

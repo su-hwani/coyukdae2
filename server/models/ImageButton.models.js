@@ -35,7 +35,6 @@ ImageButton.findByID = async (id)=>{
 
 ImageButton.findAll = async () =>{
     try{
-
         const res = await query('SELECT * FROM ImageButton')
         return {err:null, data: res}
     }catch(err){
