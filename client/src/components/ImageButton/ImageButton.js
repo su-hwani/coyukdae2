@@ -14,12 +14,15 @@ const ImageButton = ({ onClick }) => {
     IMAGEID: 0,
   }]);
 
+  const [displayImageInfo, setDisplayImageInfo] = useState(Array.from({ length: 32 }, (_, index) => index))
+
   const selectedImageIdRef = useRef([]);
-
+  const roundRef = useRef(32);
   const imageIdRef = useRef(0);
-
+  
   useEffect(() => {
-    const fetchData = async () => {
+
+    const fetchImageAllInfo = async () => {
       try {
         const response = await getImageAll();
         storeImageInfo(response);
@@ -28,60 +31,113 @@ const ImageButton = ({ onClick }) => {
         console.log(error);
       }
     };
-  
-    fetchData();
+
+    const fetchDisplayImageInfo = async () => {
+      try { 
+        const cookieString = document.cookie;
+        const cookieArray = cookieString.split('; ');
+        for (const cookie of cookieArray) {
+          const [name, value] = cookie.split('=');
+        
+          if (name === 'round') {
+            const parsedValue = JSON.parse(value);
+            roundRef.current = parsedValue
+
+            break;
+          }
+        }
+        if (roundRef.current !== 32){
+          for (const cookie of cookieArray) {
+            const [name, value] = cookie.split('=');
+          
+            if (name === 'selectedImageIdArray') {
+              const parsedValue = JSON.parse(value);
+              setDisplayImageInfo(parsedValue);
+
+              break;
+            }
+          }
+        } 
+      } catch (error) { 
+        console.log(error);
+      }
+    }
+    fetchImageAllInfo();
+    fetchDisplayImageInfo();
   }, []);
   
   const handleClick = async (newSelectedImageId) => {
-
+    newSelectedImageId -= 1
     const currentSelectedImageId = selectedImageIdRef.current 
     currentSelectedImageId.push(newSelectedImageId)
     selectedImageIdRef.current = currentSelectedImageId
     
     onClick();
-
+    
     const nextImageId = imageIdRef.current + 2;
     imageIdRef.current = nextImageId;
-
-    if (nextImageId > imageAllInfo.length) {
+    if (nextImageId > displayImageInfo.length) {
       console.error('Invalid imageId or no more images to update.');
 
-    } else if (nextImageId === imageAllInfo.length) {
-      const response = await storeSelectedImage(selectedImageIdRef); 
-      document.cookie = `selectedImageIdArray=${JSON.stringify(currentSelectedImageId)}`;
+    } else if (nextImageId === displayImageInfo.length) {
 
-      console.log(response)
-      console.log(document.cookie)
+      switch (selectedImageIdRef.current.length) {
+        case 16:
+          roundRef.current = 16
+          break;
+        case 8:
+          roundRef.current = 8
+          break;
+        case 4:
+          roundRef.current = 4
+          break;
+        case 2:
+          roundRef.current = 2
+          break;
+        case 1:
+        roundRef.current = 1
+        document.cookie = `resultImageUrl=${encodeURIComponent(imageAllInfo[newSelectedImageId].IMAGEURL)}`;
+        document.cookie = `resultImageName=${encodeURIComponent(imageAllInfo[newSelectedImageId].IMAGENAME)}`;
+        break;
+        default:
+          // roundRef.current가 위의 case에 해당하지 않을 때 수행할 동작
+          console.log('Default case');
+          break;
+      }
+      const response = await storeSelectedImage(selectedImageIdRef);
+      document.cookie = `selectedImageIdArray=${JSON.stringify(selectedImageIdRef.current)}`;
+      document.cookie = `round=${JSON.stringify(roundRef.current)}`;
+      selectedImageIdRef.current = []
     }
-  };
+  }; // TODO : 이거 서버로 보내느것도 IMageID 로 바꿔서 보내야함. 고유번호로 보내야함. 
 
   return (
     <div>
       <div>
         <div className='image-container-title'> What is the better </div>
         <div className="container">
-          <button onClick={() => handleClick(imageIdRef.current)} className="button-container">
-            {imageAllInfo[imageIdRef.current] && (
+          <button onClick={() => handleClick(imageAllInfo[displayImageInfo[imageIdRef.current]].ID)} className="button-container">
+            {imageAllInfo[displayImageInfo[imageIdRef.current]] && (
               <div className='image-container'>
                 <img className='image'
-                  src={imageAllInfo[imageIdRef.current].IMAGEURL}
-                  alt={imageAllInfo[imageIdRef.current].IMAGENAME}
+                  src={imageAllInfo[displayImageInfo[imageIdRef.current]].IMAGEURL}
+                  alt={imageAllInfo[displayImageInfo[imageIdRef.current]].IMAGENAME}
                   style={{ width: '300px', height: '250px' }}
                 />
-                {imageAllInfo[imageIdRef.current].IMAGENAME && <div className="image-name">{imageAllInfo[imageIdRef.current].IMAGENAME}</div>}
+                {imageAllInfo[displayImageInfo[imageIdRef.current]].IMAGENAME && <div className="image-name">{imageAllInfo[displayImageInfo[imageIdRef.current]].IMAGENAME}</div>}
               </div>
             )}
           </button>
           <div className='button-gap'></div>
-          <button onClick={() => handleClick(imageIdRef.current+1)} className="button-container">
-            {imageAllInfo[imageIdRef.current + 1] && (
+          <button onClick={() => handleClick(imageAllInfo[displayImageInfo[imageIdRef.current + 1]].ID)} className="button-container">
+            {imageAllInfo[displayImageInfo[imageIdRef.current + 1]] && (
               <div className='image-container'>
                 <img className='image'
-                  src={imageAllInfo[imageIdRef.current + 1].IMAGEURL}
-                  alt={imageAllInfo[imageIdRef.current + 1].IMAGENAME}
+                  src={imageAllInfo[displayImageInfo[imageIdRef.current + 1]].IMAGEURL}
+                  alt={imageAllInfo[displayImageInfo[imageIdRef.current + 1]].IMAGENAME}
                   style={{ width: '300px', height: '250px' }}
                 />
-                {imageAllInfo[imageIdRef.current + 1].IMAGENAME && <div className="image-name">{imageAllInfo[imageIdRef.current + 1].IMAGENAME}</div>}
+                {imageAllInfo[displayImageInfo[imageIdRef.current + 1]].IMAGENAME && <div className="image-name">{imageAllInfo[displayImageInfo[imageIdRef.current + 1]].IMAGENAME}</div>}
               </div>
             )}
           </button>

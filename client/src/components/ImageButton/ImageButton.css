@@ -1,7 +1,7 @@
-    .button-gap {
+  .button-gap {
     width: 50px;
   }
-  
+  @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
   .image-container-title{
     font-size: 40px;
@@ -16,26 +16,23 @@
   
   .button-divider {
     width: 100%; /* 가로선이 컨테이너 전체 너비를 가지도록 설정 */
-    margin: 10px 0; /* 위아래 간격 조절 */
     border: 2px solid #333;
   }
   
   /* 수직선 스타일 */
   .vertical-line {
     border-left: 10px solid #333; /* 세로선의 스타일을 지정합니다. */
-    height: 550px; /* 세로선의 높이를 조절합니다. */
-    margin: 10px; /* 세로선 주변의 여백을 조절합니다. */
+    height: 40px; /* 세로선의 높이를 조절합니다. */
   }
 
   .container {
-    margin: 30px;
+    margin: 5px;
     display: flex;
     box-shadow: 0 0 0 2px #333;
   }
 
   .button-container {
     display: inline-block;
-    padding: 50px 50px;
     font-size: 16px;
     text-align: center;
     text-decoration: none;
@@ -44,10 +41,8 @@
     border-radius: 20px; /* 테두리의 둥글기 정도를 조절합니다. */
     background-color: white; /* 배경색을 설정합니다. */
     color: black; /* 글자색을 설정합니다. */
-    margin: 200px;
     align-items: center;
     justify-content: center;
-    
   }
   
   .button-container:hover {
@@ -68,12 +63,11 @@
   .image-name {
     position: relative;
     background-color:  rgba(255, 0, 0, 0.0);
-    font-family: 'Arial', sans-serif; /* 글씨체 설정 (원하는 글꼴로 변경 가능) */
     font-weight: bold; /* 굵은 글씨체 적용 */
     border-radius: 10px; /* 둥근 테두리 적용 */
-    font-size: 22px;
+    font-size: 24px;
+    font-family: 'Black Han Sans', sans-serif;
   }
 
   .image {
-    margin-bottom: 30px;
   }

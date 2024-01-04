@@ -8,8 +8,11 @@ import Logo from './components/Logo/Logo.js';
 // eslint-disable-next-line no-unused-vars
 import RoundButton from './components/RoundButton/RoundButton.js';
 import Screen from './components/Screen/Screen.js';
+import { useEffect } from 'react';
 
 const App = () => {
+  document.cookie = `round=${JSON.stringify(32)}`;
+
   return (
     <div className="app-container">
       <Logo></Logo>

@@ -7,9 +7,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom, #F9BD9D, #FDE3D5);
     font-family: "Rubik Doodle Shadow", serif;
     font-weight: bold; /* 글자를 굵게 표시 */
-    color: black; 
     border-radius: 10px;
+    cursor: pointer;
+    background: white;
+}
+
+.Round-Text-container:hover{
+    background: linear-gradient(to bottom, #F9BD9D, #FDE3D5);
 }

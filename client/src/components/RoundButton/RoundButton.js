@@ -7,7 +7,7 @@ const RoundButton = ( props ) => {
   const receivedOnClick = props.onClick;
   const receivedShowRoundIndex = props.showRoundIndex;
 
-  const buttonTextList = ['START', '- 32강 -', '- 16강 -', '- 8강 -', '- 4강 -', '* 결승 *'];
+  const buttonTextList = ['START', '- Round of 32 -', '- Round of 16 -', '- Round of 8 -', '- Round of 4 -', '* FINAL *'];
   const [buttonIndex, setButtonIndex] = useState(0);
 
   // 버튼 클릭 시 호출되는 함수
@@ -19,7 +19,7 @@ const RoundButton = ( props ) => {
 
   return (
     <button className="Round-Button-container" onClick={handleButtonClick}>
-      <div className="Round-Text-container" style={{ width: '800px', height: '450px', backgroundColor: 'lightblue' }}>
+      <div className="Round-Text-container" style={{ width: '800px', height: '450px' }}>
         <div className="Round-Text">
           {buttonTextList[receivedShowRoundIndex]}
         </div>
