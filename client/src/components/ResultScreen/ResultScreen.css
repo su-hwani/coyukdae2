@@ -1,12 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');  
+
+.ReasultComponentAndResultStatisticalData {
+  display:flex;
+}
 
 .ResultComponent {
   text-align: center;
   margin: 30px;
   padding: 40px;
   padding-top: 10px;
-  padding-bottom: 20px;
-  background: linear-gradient(to bottom, #F9BD9D, #FDE3D5); 
+  background: linear-gradient(45deg, #ffbb7b, #ff9a8b);
 }
 
 .ResultImageContainer {

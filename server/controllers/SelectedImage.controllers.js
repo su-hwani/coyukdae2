@@ -69,28 +69,43 @@ exports.findAll = async (req,res)=>{
     });
 };
 
+exports.findColumn = async (req,res)=>{
+    const sessionid = req.cookies.sessionID
+    if (!sessionid) {
+        req.cookies.sessionID = req.sessionID
+    }
+    
+    const column = req.query.column
+    await SelectedImage.findColumn(column).then((result)=>{
+      if (result.err)
+          res.status(500).send({
+            message:
+              result.err || "Some error occurred while retrieving users."
+          });
+        else res.status(200).json(result.data);
+      });
+  };
+
 
 exports.insertSelectedImage = async (req, res) => {
     try {
-        const SessionID = req.sessionID; // req.sessionID를 사용하여 세션 ID를 얻습니다.
-        if (!SessionID) {
-            return res.status(400).send({
-                message: "Session is missing."
-            });
+        let sessionID = req.cookies.sessionID
+        if (!sessionID) {
+            sessionID = req.sessionID
+            req.session.sessionID = sessionID
         }
-        console.log(req.body)
-        console.log(req.body.selectedImageId)
+
         const SelectedImageIdCurrent = req.body.selectedImageId; 
         const SelectedImageIdCurrent_join = SelectedImageIdCurrent.join(',')
 
         // SessionID를 기준으로 데이터베이스에서 레코드 검색
-        let existingRecord = await SelectedImage.findBySession(SessionID); // req.SessionID 대신 SessionID를 사용합니다.
+        let existingRecord = await SelectedImage.findBySession(sessionID); 
         existingRecord = existingRecord.data
 
         if (!existingRecord) { 
             // 해당 SessionID를 가진 레코드가 없으면 오류 응답
             const newSelectedImage = new SelectedImage({
-                sessionID: SessionID
+                sessionID: sessionID
             });
             existingRecord = await SelectedImage.create(newSelectedImage);
         }
@@ -98,19 +113,19 @@ exports.insertSelectedImage = async (req, res) => {
         // 이미지 ID에 따라 필드 업데이트
         switch (SelectedImageIdCurrent.length) {
             case 16:
-                existingRecord = await SelectedImage.updateAttribute(SessionID, "Round_32", SelectedImageIdCurrent_join)
+                existingRecord = await SelectedImage.updateAttribute(sessionID, "Round_32", SelectedImageIdCurrent_join)
                 break;
             case 8:
-                existingRecord = await SelectedImage.updateAttribute(SessionID, "Round_16", SelectedImageIdCurrent_join)
+                existingRecord = await SelectedImage.updateAttribute(sessionID, "Round_16", SelectedImageIdCurrent_join)
                 break;
             case 4:
-                existingRecord = await SelectedImage.updateAttribute(SessionID, "Round_8", SelectedImageIdCurrent_join)
+                existingRecord = await SelectedImage.updateAttribute(sessionID, "Round_8", SelectedImageIdCurrent_join)
                 break;
             case 2:
-                existingRecord = await SelectedImage.updateAttribute(SessionID, "Round_4", SelectedImageIdCurrent_join)
+                existingRecord = await SelectedImage.updateAttribute(sessionID, "Round_4", SelectedImageIdCurrent_join)
                 break;
             case 1:
-                existingRecord = await SelectedImage.updateAttribute(SessionID, "Round_2", SelectedImageIdCurrent_join)
+                existingRecord = await SelectedImage.updateAttribute(sessionID, "Round_2", SelectedImageIdCurrent_join)
                 break;
             default:
                 return res.status(400).send({

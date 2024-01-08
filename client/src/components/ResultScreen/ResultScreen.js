@@ -1,6 +1,7 @@
 // Logo.js
 import React, { useEffect, useState } from 'react';
 import './ResultScreen.css';
+import ResultStatisticalData from '../ResultStatisticalData/ResultStatisticalData';
 
 const ResultScreen = () => {
     const [resultImageUrl, storeResultImageUrl] = useState('');
@@ -10,7 +11,7 @@ const ResultScreen = () => {
         const fetchCookie = async () => {
             try {
                 const cookieString = document.cookie;
-                console.log(cookieString)
+                
                 const cookieArray = cookieString.split('; ');
                 let parsedValue = null;
     
@@ -34,18 +35,21 @@ const ResultScreen = () => {
     }, []);
 
     return (
-    <div className='ResultComponent'>
-        <div className='ResultImageTitle'>Your Best Pick</div>
-        <div className='ResultImageCardContainer'>
-            <div className='ResultImageContainer'>
-                <img
-                className='ResultImage'
-                src={resultImageUrl}
-                alt={resultImageName}
-                />
+    <div className='ReasultComponentAndResultStatisticalData'>
+        <div className='ResultComponent'>
+            <div className='ResultImageTitle'>Your Best Pick</div>
+            <div className='ResultImageCardContainer'>
+                <div className='ResultImageContainer'>
+                    <img
+                    className='ResultImage'
+                    src={resultImageUrl}
+                    alt={resultImageName}
+                    />
+                </div>
+                <div className="ResultImageName">{resultImageName}</div>
             </div>
-            <div className="ResultImageName">{resultImageName}</div>
         </div>
+        <ResultStatisticalData findResult="ROUND_2" />
     </div>
     );
 };

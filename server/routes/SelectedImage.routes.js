@@ -7,4 +7,5 @@ router.post("/create", SelectedImage.create)
 router.get("/findOne", SelectedImage.findOne)
 router.get("/findAll", SelectedImage.findAll)
 router.post("/insertSelectedImage", SelectedImage.insertSelectedImage)
+router.get("/findColumn", SelectedImage.findColumn)
 module.exports = router

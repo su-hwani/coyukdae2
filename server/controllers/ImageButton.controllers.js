@@ -27,22 +27,23 @@ exports.create = async (req, res) => {
 }
 
 exports.findOne = async (req,res)=>{
-    const imageId = req.query.id;
+    const imageId = req.query.searchImageId;
+
     if (!imageId) {
       return res.status(400).send({
         message: "Image ID is missing in the query string."
       });
     }
 
-    await ImageButton.findByID(2).then((result)=>{
+    await ImageButton.findByID(imageId).then((result)=>{
       if (result.err) {
         if (result.err === "not_found") {
           res.status(404).send({
-            message: `Not found Image with id ${req.body.id}.`
+            message: `Not found Image with id ${imageId}.`
           });
         } else {
           res.status(500).send({
-            message: "Error retrieving Image with id " + req.body.id
+            message: "Error retrieving Image with id " + imageId
           });
         }
       } else res.status(200).json(result.data);
@@ -50,7 +51,6 @@ exports.findOne = async (req,res)=>{
 };
 
 exports.findAll = async (req,res)=>{
-  console.log(req.session)
   await ImageButton.findAll().then((result)=>{
     if (result.err)
         res.status(500).send({

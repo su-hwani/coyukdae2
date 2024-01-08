@@ -13,7 +13,9 @@ const storeSelectedImage = async (selectedImageId) => {
       };
   
       // API 요청 보내기
-      const response = await axios.post(apiUrl, requestBody);
+      const response = await axios.post(apiUrl, requestBody, {
+        withCredentials: true,
+      });
       // 성공적인 응답 처리
       return response.data;
     } catch (error) {

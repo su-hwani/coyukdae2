@@ -7,11 +7,11 @@ class SelectedImage {
     constructor(SelectedImage) {
         if (SelectedImage && SelectedImage.sessionID) {
             this.sessionID = SelectedImage.sessionID;
-            this.Round_32 = SelectedImage.Round_32 || 'Round_32을 추가해주세요.';
-            this.Round_16 = SelectedImage.Round_16 || 'Round_16을 추가해주세요.';
-            this.Round_8 = SelectedImage.Round_8 || 'Round_8을 추가해주세요.';
-            this.Round_4 = SelectedImage.Round_4 || 'Round_4을 추가해주세요.';
-            this.Round_2 = SelectedImage.Round_2 || 'Round_2을 추가해주세요.';
+            this.Round_32 = SelectedImage.Round_32 || null;
+            this.Round_16 = SelectedImage.Round_16 || null;
+            this.Round_8 = SelectedImage.Round_8 || null;
+            this.Round_4 = SelectedImage.Round_4 || null;
+            this.Round_2 = SelectedImage.Round_2 || null;
         }
     }
 }
@@ -27,6 +27,19 @@ SelectedImage.create = async (newSelectedImage) => {
         // query 함수가 에러를 던졌을 때
         console.error('Error in SelectedImage.create:', err);
         return { err, data: null };
+    }
+};
+
+SelectedImage.findColumn = async (column)=>{
+    try{
+        const querystring = `SELECT ${column}, COUNT(*) AS count_of_${column} FROM selectedimage WHERE ${column} IS NOT NULL GROUP BY ${column}`
+        const res = await query(querystring);
+        if (res.length){
+            return {err: null, data: res}
+        }
+        return {err:"Not Found", data:null}
+    }catch(err){
+        return {err:err, data:null}
     }
 };
 

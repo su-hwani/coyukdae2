@@ -14,7 +14,17 @@ const ImageButton = ({ onClick }) => {
     IMAGEID: 0,
   }]);
 
-  const [displayImageInfo, setDisplayImageInfo] = useState(Array.from({ length: 32 }, (_, index) => index))
+  const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
+  const initialArray = Array.from({ length: 32 }, (_, index) => index);
+  const [displayImageInfo, setDisplayImageInfo] = useState(shuffleArray(initialArray));
 
   const selectedImageIdRef = useRef([]);
   const roundRef = useRef(32);
@@ -42,7 +52,6 @@ const ImageButton = ({ onClick }) => {
           if (name === 'round') {
             const parsedValue = JSON.parse(value);
             roundRef.current = parsedValue
-
             break;
           }
         }
@@ -52,19 +61,22 @@ const ImageButton = ({ onClick }) => {
           
             if (name === 'selectedImageIdArray') {
               const parsedValue = JSON.parse(value);
-              setDisplayImageInfo(parsedValue);
-
+              setDisplayImageInfo(shuffleArray(parsedValue));
               break;
             }
           }
-        } 
+        } else {
+          setDisplayImageInfo(shuffleArray(displayImageInfo))
+        }
       } catch (error) { 
         console.log(error);
       }
     }
+
     fetchImageAllInfo();
     fetchDisplayImageInfo();
   }, []);
+
   
   const handleClick = async (newSelectedImageId) => {
     newSelectedImageId -= 1
@@ -109,7 +121,7 @@ const ImageButton = ({ onClick }) => {
       document.cookie = `round=${JSON.stringify(roundRef.current)}`;
       selectedImageIdRef.current = []
     }
-  }; // TODO : 이거 서버로 보내느것도 IMageID 로 바꿔서 보내야함. 고유번호로 보내야함. 
+  }; 
 
   return (
     <div>

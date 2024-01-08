@@ -29,7 +29,10 @@ const corsOptions = {
     }
   },
 };
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -38,7 +41,11 @@ app.use(
     secret: secretKey, // 세션을 암호화하는 데 사용되는 키
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // HTTPS를 사용하지 않을 경우 false
+    cookie: { 
+      maxAge: 360000, //1분=60000, 1시간=360000
+      secure: false,
+      httpOnly: true
+     } // HTTPS를 사용하지 않을 경우 false
   })
 );
 
