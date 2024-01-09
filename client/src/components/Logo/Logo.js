@@ -11,7 +11,7 @@ const Logo = () => {
         alt="Logo"
         style={{ width: '120px', height: '70px' }}
         ></img> */}
-        <button className='Logo-button'> Minimal </button>
+        <button className='Logo-button'> Suhwan </button>
         
     </div>
   );

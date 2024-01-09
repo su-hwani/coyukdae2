@@ -9,7 +9,6 @@ const getImageAll = async () => {
 
     // API 요청 보내기
     const response = await axios.get(api, { withCredentials: true });
-    console.log(response.headers['set-cookie'])
     // 성공적인 응답 처리
 
   

@@ -126,7 +126,7 @@ const ImageButton = ({ onClick }) => {
   return (
     <div>
       <div>
-        <div className='image-container-title'> What is the better </div>
+        <div className='image-container-title'>Who is better ? </div>
         <div className="container">
           <button onClick={() => handleClick(imageAllInfo[displayImageInfo[imageIdRef.current]].ID)} className="button-container">
             {imageAllInfo[displayImageInfo[imageIdRef.current]] && (

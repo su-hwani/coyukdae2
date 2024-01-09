@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className='header'>
         <SlPresent className="tree-icon" size="40px"></SlPresent>
-        <div className='header-title'>Choose one you like the Most</div>
+        <div className='header-title'>Choose your favorite celebrity</div>
         <SlPresent className="tree-icon" size="40px"></SlPresent>
     </header>
   );
