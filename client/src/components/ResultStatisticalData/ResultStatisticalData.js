@@ -24,7 +24,7 @@ const ResultStatisticalData = (props) => {
         for (let i = 0; i < sortedData.length; i++) {
           const numericTopWinnerId = parseInt(sortedData[i][findResult], 10);
           const getFinalPickMostData = await getImageOneById(numericTopWinnerId+1);
-          console.log(getFinalPickMostData)
+          
           setFinalPickMostImageInfo(prevState => [
             ...prevState, // 기존 배열의 내용을 그대로 유지
             getFinalPickMostData

@@ -1,13 +1,13 @@
 import axios from 'axios';
-
+import apiUrl from './apiUrl';
 // API 요청을 보내는 함수
 const getResultData = async (selectRoundColumn) => {
     try {
       // API 엔드포인트 URL 설정
-      const apiUrl = 'http://localhost:8080/SelectedImage/findColumn'; 
+      const api = apiUrl+ 'SelectedImage/findColumn'; 
   
       // API 요청 보내기
-      const response = await axios.get(apiUrl, {
+      const response = await axios.get(api, {
         params: {
           column: selectRoundColumn
         },

@@ -1,15 +1,18 @@
 import axios from 'axios';
+import apiUrl from './apiUrl';
 
 // API 요청을 보내는 함수
 const getImageAll = async () => {
   try {
     // API 엔드포인트 URL 설정
-    const apiUrl = 'http://localhost:8080/ImageButton/findAll'; 
+    const api = apiUrl+ 'ImageButton/findAll'; 
 
     // API 요청 보내기
-    const response = await axios.get(apiUrl);
-
+    const response = await axios.get(api, { withCredentials: true });
+    console.log(response.headers['set-cookie'])
     // 성공적인 응답 처리
+
+  
     
     return response.data;
   } catch (error) {

@@ -1,10 +1,11 @@
 import axios from 'axios';
+import apiUrl from './apiUrl';
 
 // API 요청을 보내는 함수
 const storeSelectedImage = async (selectedImageId) => {
     try {
       // API 엔드포인트 URL 설정
-      const apiUrl = 'http://localhost:8080/SelectedImage/insertSelectedImage'; 
+      const api = apiUrl + 'SelectedImage/insertSelectedImage'; 
   
       // 요청 바디에 담을 데이터
       const requestBody = {
@@ -13,7 +14,7 @@ const storeSelectedImage = async (selectedImageId) => {
       };
   
       // API 요청 보내기
-      const response = await axios.post(apiUrl, requestBody, {
+      const response = await axios.post(api, requestBody, {
         withCredentials: true,
       });
       // 성공적인 응답 처리

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiUrl from './apiUrl';
 
 // API 요청을 보내는 함수
 const getImageOneById = async (searchImageId) => {
@@ -6,10 +7,10 @@ const getImageOneById = async (searchImageId) => {
     const numericSearchImageId = parseInt(searchImageId, 10);
 
     // API 엔드포인트 URL 설정
-    const apiUrl = 'http://localhost:8080/ImageButton/findOne'; 
+    const api = apiUrl+ 'ImageButton/findOne'; 
 
     // API 요청 보내기
-    const response = await axios.get(apiUrl, {
+    const response = await axios.get(api, {
       params: {
         searchImageId: numericSearchImageId
       },

@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const app = express() 
 const port = 8080
+const http = require("http");
 
 const testRoute = require("./routes/test.routes.js")
 const ImageButtonRoute = require("./routes/ImageButton.routes.js")
@@ -30,7 +31,7 @@ const corsOptions = {
   },
 };
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000','https://gabin.loca.lt/','https://gabin.loca.lt'],
   credentials: true,
 }));
 app.use(bodyParser.json());
@@ -44,7 +45,7 @@ app.use(
     cookie: { 
       maxAge: 360000, //1분=60000, 1시간=360000
       secure: false,
-      httpOnly: true
+      httpOnly: false
      } // HTTPS를 사용하지 않을 경우 false
   })
 );

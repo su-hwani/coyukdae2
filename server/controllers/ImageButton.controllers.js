@@ -27,6 +27,7 @@ exports.create = async (req, res) => {
 }
 
 exports.findOne = async (req,res)=>{
+    
     const imageId = req.query.searchImageId;
 
     if (!imageId) {
@@ -51,6 +52,8 @@ exports.findOne = async (req,res)=>{
 };
 
 exports.findAll = async (req,res)=>{
+  await res.cookie("sessionID", req.sessionID, {maxAge:60000, httpOnly: true })
+  
   await ImageButton.findAll().then((result)=>{
     if (result.err)
         res.status(500).send({
