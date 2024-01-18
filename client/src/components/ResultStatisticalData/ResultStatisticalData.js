@@ -27,6 +27,23 @@ const ResultStatisticalData = (props) => {
   const findResult = props.findResult;
 
   useEffect(() => {
+    const cookieRemover = async ( cookieNameToRemove ) => {
+      // 현재 도메인의 모든 쿠키를 가져오기
+      const cookies = document.cookie.split("; ");
+
+      // 각 쿠키에 대해 이름을 확인하고 특정 쿠키를 삭제
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+
+        if (name === cookieNameToRemove) {
+          // 특정 쿠키에 대해 만료 날짜를 설정하여 삭제
+          document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+          break; // 특정 쿠키를 찾았으면 반복문 종료
+        }
+      }
+    }
 
     const fetchResultData = async () => {
       try {
@@ -51,6 +68,7 @@ const ResultStatisticalData = (props) => {
     }
 
     fetchResultData();
+    cookieRemover("sessionID")
   }, []); // findResult를 의존성 배열에 추가
 
   useEffect(() => {
@@ -62,10 +80,7 @@ const ResultStatisticalData = (props) => {
           importImage(FinalPickMostImageInfo[5].IMAGEURL, storeThirdImageModule)
         }
       }
-    }else {
-      console.log("erorr")
     }
-
   }, [FinalPickMostImageInfo])
 
   return (
