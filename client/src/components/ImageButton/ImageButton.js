@@ -5,6 +5,7 @@ import * as ReactIcons from "react-icons/fa6";
 import getImageAll from '../../api/getImageAll';
 import RoundButton from '../RoundButton/RoundButton';
 import storeSelectedImage from '../../api/storeSelectedImage';
+import Chuu from "../../images/Chuu.jpeg"
 
 const ImageButton = ({ onClick }) => {
 
@@ -13,6 +14,8 @@ const ImageButton = ({ onClick }) => {
     IMAGENAME: '',
     IMAGEID: 0,
   }]);
+  const [importLeftImageModule, storeImportLeftImageModule] = useState(null);
+  const [importRightImageModule, storeImportRightImageModule] = useState(null);
 
   const shuffleArray = (array) => {
     const newArray = [...array];
@@ -77,6 +80,20 @@ const ImageButton = ({ onClick }) => {
     fetchDisplayImageInfo();
   }, []);
 
+  useEffect(() => {
+    const impoortImage = async () => {
+      try {
+        const leftImageModule = await import(`../../images/${imageAllInfo[displayImageInfo[imageIdRef.current]].IMAGEURL}.jpeg`);
+        const rightImageModule = await import(`../../images/${imageAllInfo[displayImageInfo[imageIdRef.current+1]].IMAGEURL}.jpeg`);
+        storeImportLeftImageModule(leftImageModule.default);
+        storeImportRightImageModule(rightImageModule.default)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    impoortImage();
+  }, [displayImageInfo, imageAllInfo, imageIdRef.current])
+
   
   const handleClick = async (newSelectedImageId) => {
     newSelectedImageId -= 1
@@ -132,7 +149,7 @@ const ImageButton = ({ onClick }) => {
             {imageAllInfo[displayImageInfo[imageIdRef.current]] && (
               <div className='image-container'>
                 <img className='image'
-                  src={imageAllInfo[displayImageInfo[imageIdRef.current]].IMAGEURL}
+                  src={importLeftImageModule}
                   alt={imageAllInfo[displayImageInfo[imageIdRef.current]].IMAGENAME}
                   style={{ width: '300px', height: '250px' }}
                 />
@@ -145,7 +162,7 @@ const ImageButton = ({ onClick }) => {
             {imageAllInfo[displayImageInfo[imageIdRef.current + 1]] && (
               <div className='image-container'>
                 <img className='image'
-                  src={imageAllInfo[displayImageInfo[imageIdRef.current + 1]].IMAGEURL}
+                  src={importRightImageModule}
                   alt={imageAllInfo[displayImageInfo[imageIdRef.current + 1]].IMAGENAME}
                   style={{ width: '300px', height: '250px' }}
                 />

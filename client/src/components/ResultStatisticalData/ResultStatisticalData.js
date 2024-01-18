@@ -5,6 +5,19 @@ import getImageOneById from '../../api/getImageOneById';
 
 const ResultStatisticalData = (props) => {
 
+  const importImage = async (importImage, storeFunction) => {
+    try {
+        const importImageModule = await import(`../../images/${importImage}.jpeg`);
+        storeFunction(importImageModule.default)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const [firstImageModule, storeFirstImageModule] = useState();
+  const [secondImageModule, storeSecondImageModule] = useState();
+  const [thirdImageModule, storeThirdImageModule] = useState();
+
   const [FinalPickMostImageInfo, setFinalPickMostImageInfo] = useState([{
     IMAGEURL: '',
     IMAGENAME: '',
@@ -14,6 +27,7 @@ const ResultStatisticalData = (props) => {
   const findResult = props.findResult;
 
   useEffect(() => {
+
     const fetchResultData = async () => {
       try {
         const getFinalPickAllData = await getResultData(findResult);
@@ -39,13 +53,28 @@ const ResultStatisticalData = (props) => {
     fetchResultData();
   }, []); // findResult를 의존성 배열에 추가
 
+  useEffect(() => {
+    if (FinalPickMostImageInfo.length>=2){
+      importImage(FinalPickMostImageInfo[1].IMAGEURL, storeFirstImageModule)
+      if (FinalPickMostImageInfo.length>=4){
+        importImage(FinalPickMostImageInfo[3].IMAGEURL, storeSecondImageModule)
+        if (FinalPickMostImageInfo.length>=6){
+          importImage(FinalPickMostImageInfo[5].IMAGEURL, storeThirdImageModule)
+        }
+      }
+    }else {
+      console.log("erorr")
+    }
+
+  }, [FinalPickMostImageInfo])
+
   return (
   <div className='rank-container'>
     <div className='rank-container-title'>Ranking</div>
     <div className='ResultFirstImage'>
       {FinalPickMostImageInfo.length >= 2 && (
         <img className='image'
-          src={FinalPickMostImageInfo[1].IMAGEURL}
+          src={firstImageModule}
           alt={FinalPickMostImageInfo[1].IMAGENAME}
           style={{ width: '120px', height: '120px' }}
         />
@@ -55,7 +84,7 @@ const ResultStatisticalData = (props) => {
     <div className='ResultSecondImage'>
       {FinalPickMostImageInfo.length >= 4 && (
         <img className='image'
-          src={FinalPickMostImageInfo[3].IMAGEURL}
+          src={secondImageModule}
           alt={FinalPickMostImageInfo[3].IMAGENAME}
           style={{ width: '110px', height: '110px' }}
         />
@@ -65,7 +94,7 @@ const ResultStatisticalData = (props) => {
     <div className='ResultThirdImage'>
       {FinalPickMostImageInfo.length >= 6 && (
         <img className='image'
-          src={FinalPickMostImageInfo[5].IMAGEURL}
+          src={thirdImageModule}
           alt={FinalPickMostImageInfo[5].IMAGENAME}
           style={{ width: '100px', height: '100px' }}
         />

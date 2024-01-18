@@ -8,6 +8,15 @@ const ResultScreen = () => {
     const [resultImageName, storeResultImageName] = useState('');
 
     useEffect(() => {
+        const importImage = async (importImage) => {
+            try {
+                const importImageModule = await import(`../../images/${importImage}.jpeg`);
+                storeResultImageUrl(importImageModule.default)
+            } catch (err) {
+              console.log(err)
+            }
+        }
+
         const fetchCookie = async () => {
             try {
                 const cookieString = document.cookie;
@@ -21,9 +30,10 @@ const ResultScreen = () => {
                     if (name.trim() === 'resultImageName') {
                         const decodedValue = decodeURIComponent(value);
                         storeResultImageName(decodedValue);
+                        
                     } else if (name.trim() === 'resultImageUrl') {
                         const decodedValue = decodeURIComponent(value);
-                        storeResultImageUrl(decodedValue);
+                        importImage(decodedValue)
                     }
                 }
             } catch (error) {
