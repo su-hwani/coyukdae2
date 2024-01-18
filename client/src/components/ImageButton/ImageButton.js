@@ -81,7 +81,7 @@ const ImageButton = ({ onClick }) => {
   }, []);
 
   useEffect(() => {
-    const impoortImage = async () => {
+    const importImage = async () => {
       try {
         const leftImageModule = await import(`../../images/${imageAllInfo[displayImageInfo[imageIdRef.current]].IMAGEURL}.jpeg`);
         const rightImageModule = await import(`../../images/${imageAllInfo[displayImageInfo[imageIdRef.current+1]].IMAGEURL}.jpeg`);
@@ -91,7 +91,7 @@ const ImageButton = ({ onClick }) => {
         console.log(err)
       }
     }
-    impoortImage();
+    importImage();
   }, [displayImageInfo, imageAllInfo, imageIdRef.current])
 
   
