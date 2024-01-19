@@ -5,7 +5,7 @@ import apiUrl from './apiUrl';
 const getImageAll = async () => {
   try {
     // API 엔드포인트 URL 설정
-    const api = apiUrl+ 'ImageButton/findAll'; 
+    const api = 'ImageButton/findAll'; 
 
     // API 요청 보내기
     const response = await axios.get(api, { withCredentials: true });

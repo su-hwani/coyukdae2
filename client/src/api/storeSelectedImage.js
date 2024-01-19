@@ -5,7 +5,7 @@ import apiUrl from './apiUrl';
 const storeSelectedImage = async (selectedImageId) => {
     try {
       // API 엔드포인트 URL 설정
-      const api = apiUrl + 'SelectedImage/insertSelectedImage'; 
+      const api = 'SelectedImage/insertSelectedImage'; 
   
       // 요청 바디에 담을 데이터
       const requestBody = {

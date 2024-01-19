@@ -88,7 +88,7 @@ const ImageButton = ({ onClick }) => {
         storeImportLeftImageModule(leftImageModule.default);
         storeImportRightImageModule(rightImageModule.default)
       } catch (err) {
-        console.log(err)
+        
       }
     }
     importImage();

@@ -128,3 +128,12 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# certification Key
+*.rootca.crt 
+*.rootca.key
+*.localhost-key.pem
+*.localhost.pem
+# certification Key
+*.rootca.crt 
+*.rootca.key

@@ -7,7 +7,7 @@ const getImageOneById = async (searchImageId) => {
     const numericSearchImageId = parseInt(searchImageId, 10);
 
     // API 엔드포인트 URL 설정
-    const api = apiUrl+ 'ImageButton/findOne'; 
+    const api = 'ImageButton/findOne'; 
 
     // API 요청 보내기
     const response = await axios.get(api, {
