@@ -21,8 +21,8 @@ const crypto = require('crypto');
 
 // 랜덤한 32바이트의 시크릿 키 생성
 const secretKey = crypto.randomBytes(32).toString('hex');
-const httpPort = 8080
-const httpsPort = 8000
+const httpPort = 8000
+const httpsPort = 8080
 console.log('Secret Key:', secretKey);
 
 // CORS 설정
