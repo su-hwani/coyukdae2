@@ -37,7 +37,7 @@ console.log('Secret Key:', secretKey);
 //   },
 // };
 
-// ngrok 으로 localhost 외부 접속 허용 성공!! 
+// ngrok 으로 localhost 외부 접속 허용 성공!!! 
 const ngrokUrl = 'https://8e51-121-130-212-39.ngrok-free.app'
 
 app.use(cors({
