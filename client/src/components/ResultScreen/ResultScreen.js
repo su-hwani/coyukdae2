@@ -22,7 +22,6 @@ const ResultScreen = () => {
                 const cookieString = document.cookie;
                 
                 const cookieArray = cookieString.split('; ');
-                let parsedValue = null;
     
                 for (const cookie of cookieArray) {
                     const [name, value] = cookie.split('=');

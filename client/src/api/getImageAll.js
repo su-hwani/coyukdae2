@@ -1,5 +1,5 @@
 import axios from 'axios';
-import apiUrl from './apiUrl';
+// import apiUrl from './apiUrl';
 
 // API 요청을 보내는 함수
 const getImageAll = async () => {
