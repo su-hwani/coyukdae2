@@ -12,7 +12,6 @@ import { useEffect } from 'react';
 
 const App = () => {
   document.cookie = `round=${JSON.stringify(32)}`;
-
   return (
     <div className="app-container">
       <Logo></Logo>
