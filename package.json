@@ -4,12 +4,14 @@
   "description": "항해 플러스: 제 2회 코육대",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run dev --prefix ./server\" "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.2",
+    "concurrently": "^8.2.2",
     "react-bootstrap": "^2.9.2"
   }
 }
