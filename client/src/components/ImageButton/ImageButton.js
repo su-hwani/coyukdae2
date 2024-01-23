@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import './ImageButton.css'
-import * as ReactIcons from "react-icons/fa6";
 import getImageAll from '../../api/getImageAll';
-import RoundButton from '../RoundButton/RoundButton';
 import storeSelectedImage from '../../api/storeSelectedImage';
-import Chuu from "../../images/Chuu.jpeg"
 
 const ImageButton = ({ onClick }) => {
 
