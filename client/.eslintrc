@@ -1,0 +1,8 @@
+{
+    "rules": {
+      "react-hooks/exhaustive-deps": "off",
+      "no-unused-vars": "off"
+      // 다른 규칙도 필요에 따라 추가 가능
+    }
+  }
+  
