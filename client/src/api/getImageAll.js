@@ -4,9 +4,9 @@ import axios from 'axios';
 // API 요청을 보내는 함수
 const getImageAll = async () => {
   try {
-    console.log(URL)
+
     // API 엔드포인트 URL 설정
-    const api = `/ImageButton/findAll`; 
+    const api = `/proxy/ImageButton/findAll`; 
     console.log(api)
     // API 요청 보내기
     const response = await axios.get(api, { withCredentials: true });
