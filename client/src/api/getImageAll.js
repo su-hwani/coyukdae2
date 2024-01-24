@@ -9,7 +9,7 @@ const getImageAll = async () => {
 
     console.log(URL)
     // API 엔드포인트 URL 설정
-    const api = `http://localhost:8000/ImageButton/findAll`; 
+    const api = `https://localhost:8080/ImageButton/findAll`; 
     console.log(api)
     // API 요청 보내기
     const response = await axios.get(api, { withCredentials: true });
