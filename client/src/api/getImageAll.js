@@ -12,7 +12,7 @@ const getImageAll = async () => {
     const api = `${URL}/ImageButton/findAll`; 
     console.log(api)
     // API 요청 보내기
-    const response = await axios.get(api, { withCredentials: true });
+    const response = await axios.get("https://localhost:8080", { withCredentials: true });
     
     // 성공적인 응답 처리
     console.log(response)
