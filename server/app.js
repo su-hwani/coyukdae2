@@ -14,6 +14,7 @@ const certOptions = {
 const testRoute = require("./routes/test.routes.js")
 const ImageButtonRoute = require("./routes/ImageButton.routes.js")
 const SelectedImageRoute = require("./routes/SelectedImage.routes.js")
+app.use(express.urlencoded({ extended: true }))
 
 const bodyParser = require("body-parser");
 

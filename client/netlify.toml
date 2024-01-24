@@ -3,6 +3,6 @@
     publish = "build"
 [[redirects]]
     from = "/proxy/*"
-    to = "https://localhost:8080/:splat"
+    to = "http://localhost:8000/:splat"
     status = 200
     force = true
