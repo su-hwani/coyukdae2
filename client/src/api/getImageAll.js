@@ -6,15 +6,14 @@ const getImageAll = async () => {
   try {
     const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
     const URL = `${PROXY}`;
-    const response12 = await axios.get("http://localhost:8000", { withCredentials: true });
-    console.log(response12)
 
     console.log(URL)
     // API 엔드포인트 URL 설정
     const api = `${URL}/ImageButton/findAll`; 
-
+    console.log(api)
     // API 요청 보내기
     const response = await axios.get(api, { withCredentials: true });
+    
     // 성공적인 응답 처리
     console.log(response)
     console.log("getImageAll response success")
