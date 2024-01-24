@@ -52,6 +52,7 @@ exports.findOne = async (req,res)=>{
 };
 
 exports.findAll = async (req,res)=>{
+  console.log(req)
   await res.cookie("sessionID", req.sessionID, {maxAge: 30 * 60000, httpOnly: true }) // 30분 
   
   await ImageButton.findAll().then((result)=>{

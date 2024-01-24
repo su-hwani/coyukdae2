@@ -3,6 +3,6 @@
     publish = "build"
 [[redirects]]
     from = "/proxy/*"
-    to = "http://localhost:8000"
+    to = "http://localhost:8000/"
     status = 200
     force = true
