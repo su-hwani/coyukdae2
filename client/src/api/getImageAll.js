@@ -15,7 +15,7 @@ const getImageAll = async () => {
     
     const apiEndpoint = '/ImageButton/findAll';
 
-    const response = await axios.get(apiEndpoint);
+    const response = await api.get(apiEndpoint);
     
     // 성공적인 응답 처리
     console.log(response)
