@@ -40,8 +40,9 @@ console.log('Secret Key:', secretKey);
 // ngrok 으로 localhost 외부 접속 허용 성공!!! 
 const ngrokUrl = 'https://8e51-121-130-212-39.ngrok-free.app'
 const koyebUrl = 'https://suhwani-kookmin.koyeb.app'
+const netlifyUrl = 'https://main--animated-brigadeiros-7e9e9a.netlify.app'
 app.use(cors({
-  origin: ['https://localhost:3000', 'http://localhost:3000', ngrokUrl, koyebUrl],
+  origin: ['https://localhost:3000', 'http://localhost:3000', ngrokUrl, koyebUrl, netlifyUrl],
   credentials: true,
 }));
 app.use(bodyParser.json());
