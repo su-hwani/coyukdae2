@@ -5,7 +5,7 @@ import axios from 'axios';
 const getImageAll = async () => {
   try {
     const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
-    const URL = `${PROXY}`;
+    const URL = `/proxy`;
     // API 엔드포인트 URL 설정
     const api = axios.create({
       baseURL: URL,
