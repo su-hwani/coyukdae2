@@ -16,8 +16,8 @@ const getImageAll = async () => {
     // 성공적인 응답 처리
     console.log(response)
     console.log("getImageAll response success")
-
-  
+    const response12 = await axios.get("http://localhost:8000", { withCredentials: true });
+    console.log(response12)
     
     return response.data;
   } catch (error) {
